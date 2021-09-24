@@ -1,17 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <v-app>
+      <v-main>
+        <v-container>
+          <v-row>
+            <v-col v-for="n in 16" :key="n" cols="4">
+              <v-card elevation="2" height="300" width="400">
+                <random-chart></random-chart>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
+import BarChartWidget from "@/components/BarChartWidget.vue";
+import RandomChart from "@/components/RandomChart.vue";
 
 @Component({
   components: {
-    HelloWorld,
+    RandomChart,
+    BarChartWidget,
   },
 })
 export default class App extends Vue {}
