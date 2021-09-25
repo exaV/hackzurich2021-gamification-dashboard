@@ -1,6 +1,6 @@
 <template>
   <div class="small">
-    <bar-chart :chart-data="datacollection"></bar-chart>
+    <bar-chart :chart-data="datacollection" class="chart"></bar-chart>
     <button @click="fillData">Randomize</button>
   </div>
 </template>
@@ -47,8 +47,4 @@ export default Vue.extend({
 </script>
 
 <style>
-.small {
-  max-width: 600px;
-  margin: 150px auto;
-}
 </style>
