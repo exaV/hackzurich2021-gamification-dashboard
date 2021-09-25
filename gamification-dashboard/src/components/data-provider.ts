@@ -45,6 +45,22 @@ export class DataProvider {
     console.log("data", data);
     return data as unknown as ChallengeEntry[];
   }
+
+  public static convert(entries: ChallengeEntry[]): DataCollection {
+    console.log(`converting ${entries.length} challenge entries`);
+    const result: DataCollection = {
+      datasets: entries.map((entry) => {
+        return {
+          backgroundColor: "#f87979",
+          data: [entry.value],
+          label: entry.user.first_name,
+        };
+      }),
+      labels: [12],
+    };
+    console.log(`result=${JSON.stringify(result)}`);
+    return result;
+  }
 }
 
 export interface LeaderBoardCollection {

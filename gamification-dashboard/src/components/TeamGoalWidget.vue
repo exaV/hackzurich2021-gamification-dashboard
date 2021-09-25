@@ -5,9 +5,8 @@
         :chartdata="sum"
         :options="chartOptions"
         :styles="chartStyles"
-        style="max-width: 30%; max-height: 100%; padding-bottom: 12px"
+        style="max-width: 30%; max-height: 200px; padding-bottom: 12px"
       ></BarChart>
-      <v-spacer style="width: 1em"></v-spacer>
       <v-simple-table>
         <template v-slot:default>
           <thead>
@@ -30,15 +29,18 @@
 <script>
 import BarChart from "@/components/BarChart";
 import Vue from "vue";
-import { DataProvider } from "@/components/data-provider";
+import { ChallengeEntry, DataProvider } from "@/components/data-provider";
 
 const provider = new DataProvider();
 
 export default Vue.extend({
   components: { BarChart },
+  props: {
+    challengeEntries: ChallengeEntry,
+  },
   data() {
     return {
-      contributors: provider.randomCollection(5),
+      contributors: DataProvider.convert(this.challengeEntries),
       sum: provider.randomCollection(1),
       chartOptions: {
         responsive: true,

@@ -28,7 +28,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      datacollection: this.convert(this.challengeEntries),
+      datacollection: DataProvider.convert(this.challengeEntries),
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
@@ -83,23 +83,6 @@ export default Vue.extend({
         height: "100%",
       },
     };
-  },
-  methods: {
-    convert(entries: ChallengeEntry[]): DataCollection {
-      console.log(`converting ${entries.length} challenge entries`);
-      const result = {
-        datasets: entries.map((entry) => {
-          return {
-            backgroundColor: "#f87979",
-            data: [entry.value],
-            label: entry.user.first_name,
-          };
-        }),
-        labels: ["blubbb"],
-      };
-      console.log(`result=${JSON.stringify(result)}`);
-      return result;
-    },
   },
 });
 </script>

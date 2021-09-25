@@ -8,13 +8,13 @@
         <v-row class="subtitle">
           {{ challenge.description }}
         </v-row>
-        <v-row v-if="challengeDetails" style="height: 100%">
+        <v-row v-if="challengeDetails" style="height: 100%; max-height: 70%">
           <!-- TODO show appropriate content here base on-->
           <highest-score-chart
             v-if="challenge.type === 'max'"
             v-bind:challenge-entries="challengeDetails"
           ></highest-score-chart>
-          <TeamGoalWidget v-if="challenge.type === 'sum-up'"></TeamGoalWidget>
+          <TeamGoalWidget v-if="challenge.type === 'sum-up'" v-bind:challenge-entries="challengeDetails" ></TeamGoalWidget>
         </v-row>
         <v-row v-else>
           <v-progress-circular indeterminate></v-progress-circular>
