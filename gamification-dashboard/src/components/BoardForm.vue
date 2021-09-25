@@ -68,6 +68,13 @@
 <script lang="ts">
 import Vue from "vue";
 
+const availableTypes = {
+  "Highest Value": "max",
+  "Lowest Value": "min",
+  Streak: "streak",
+  "Team Goal": "sum-up",
+};
+
 export default Vue.extend({
   template: "#board-form",
   name: "BoardForm",
@@ -82,14 +89,13 @@ export default Vue.extend({
           end_date: this.$data.end,
           private: this.$data.radioGroup === 1,
           password: this.$data.password,
+          type: availableTypes[this.$data.select],
           owner: 1,
         }),
       };
-      console.log(requestOptions);
       fetch(`${window.location.origin}/api/v1/challenge/`, requestOptions)
         .then((response) => response.json())
         .then((response) => console.log(response));
-      //TODO store values with api
       this.$emit("closeModal");
     },
   },
@@ -108,7 +114,7 @@ export default Vue.extend({
         "Description must be less than 250 characters",
     ],
     select: null,
-    items: ["Highest Value", "Lowest Value", "Streak", "Global Goal"],
+    items: Object.keys(availableTypes),
     datasource: null,
     interfaces: ["Fitbit", "Github", "Logging"],
     goal: 0,
