@@ -81,7 +81,7 @@ export default Vue.extend({
         body: JSON.stringify({ title: this.$data.title, description: this.$data.description, end_date:this.$data.end, private: this.$data.radioGroup === 1, password: this.$data.password, owner: 1 })
       };
       console.log(requestOptions)
-      fetch("http://cfbf-178-239-165-202.ngrok.io/api/v1/challenge/", requestOptions)
+      fetch("https://70c6-178-239-165-206.ngrok.io/api/v1/challenge/", requestOptions)
           .then(response => response.json())
           .then(response => console.log(response));
       //TODO store values with api
