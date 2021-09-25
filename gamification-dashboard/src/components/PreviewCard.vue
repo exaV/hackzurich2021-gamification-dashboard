@@ -11,8 +11,10 @@
         <v-row v-if="challengeDetails" style="height: 100%">
           <!-- TODO show appropriate content here base on-->
           <highest-score-chart
+            v-if="challenge.type === 'max'"
             v-bind:challenge-entries="challengeDetails"
           ></highest-score-chart>
+          <TeamGoalWidget v-if="challenge.type === 'sum-up'"></TeamGoalWidget>
         </v-row>
         <v-row v-else>
           <v-progress-circular indeterminate></v-progress-circular>
@@ -22,18 +24,18 @@
   </v-container>
 </template>
 <script lang="ts">
-
 import {
   Challenge,
   ChallengeEntry,
   DataProvider,
 } from "@/components/data-provider";
 import HighestScoreChart from "@/components/HighestScoreChart.vue";
+import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
 
 const provider = new DataProvider();
 
 export default {
-  components: { HighestScoreChart },
+  components: { TeamGoalWidget, HighestScoreChart },
   props: {
     // eslint-disable-next-line
     challenge: Challenge,

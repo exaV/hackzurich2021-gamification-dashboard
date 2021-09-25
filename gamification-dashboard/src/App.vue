@@ -64,7 +64,6 @@
               cols="4"
             >
               <v-card
-                v-if="index % 2 === 0"
                 elevation="2"
                 class="preview-card"
                 height="300"
@@ -74,21 +73,7 @@
                   showDetail = true;
                 "
               >
-                <preview-card
-                  v-bind:challenge="challenge"
-                ></preview-card>
-              </v-card>
-              <v-card
-                v-if="index % 2 === 1"
-                elevation="2"
-                height="300"
-                width="400"
-                @click="
-                  currentBoardComponent = challenge;
-                  showDetail = true;
-                "
-              >
-                <team-goal-widget></team-goal-widget>
+                <preview-card v-bind:challenge="challenge"></preview-card>
               </v-card>
             </v-col>
             <v-col cols="4">
@@ -126,7 +111,6 @@
 import { Vue } from "vue-property-decorator";
 import BoardForm from "@/components/BoardForm.vue";
 
-import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
 import BoardDetails from "@/components/BoardDetails.vue";
 import PreviewCard from "@/components/PreviewCard.vue";
 import {
@@ -141,7 +125,6 @@ export default Vue.extend({
   components: {
     PreviewCard,
     BoardDetails,
-    TeamGoalWidget,
     BoardForm,
   },
   data: () => {
