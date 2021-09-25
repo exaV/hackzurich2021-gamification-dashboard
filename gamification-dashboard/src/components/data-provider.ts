@@ -31,10 +31,23 @@ export class DataProvider {
       challenges: data as unknown as Challenge[],
     };
   }
+
+  public async getChallengeEntry(challenge: number): Promise<ChallengeEntry[]> {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    const response = await fetch(
+      `${window.location.origin}api/v1/challengeentry?challenge=${challenge}`,
+      requestOptions
+    );
+    const data = await response.json();
+    console.log("data", data);
+    return data as unknown as ChallengeEntry[];
+  }
 }
 
 export interface LeaderBoardCollection {
-
   challenges: Challenge[];
 }
 
@@ -50,6 +63,26 @@ export interface Challenge {
   owner: number;
 }
 
+export interface ChallengeEntry {
+  id: number;
+  value: number;
+  user: User;
+}
+
+export interface User {
+  id: number;
+  last_login: Date | null;
+  is_superuser: boolean;
+  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  is_staff: boolean;
+  is_active: boolean;
+  date_joined: Date;
+  groups: any[];
+  user_permissions: any[];
+}
 
 export interface DataCollection {
   datasets: {
@@ -58,8 +91,4 @@ export interface DataCollection {
     label: string;
   }[];
   labels: number[];
-}
-
-export interface ChallengeEntry {
-  id: string;
 }
