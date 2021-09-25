@@ -8,14 +8,16 @@
 <script lang="ts">
 import BarChart from "./BarChart.vue";
 import Vue from "vue";
+import { DataCollection, DataProvider } from "@/components/data-provider";
 
+const provider = new DataProvider();
 export default Vue.extend({
   components: {
     BarChart,
   },
   data() {
     return {
-      datacollection: null,
+      datacollection: null as DataCollection | null,
     };
   },
   mounted() {
@@ -23,28 +25,10 @@ export default Vue.extend({
   },
   methods: {
     fillData() {
-      this.datacollection = {
-        labels: [this.getRandomInt(), this.getRandomInt()],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [this.getRandomInt(), this.getRandomInt()],
-          },
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [this.getRandomInt(), this.getRandomInt()],
-          },
-        ],
-      };
-    },
-    getRandomInt(): number {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
+      this.datacollection = provider.randomCollection(5);
     },
   },
 });
 </script>
 
-<style>
-</style>
+<style></style>

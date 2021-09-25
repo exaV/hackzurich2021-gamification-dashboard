@@ -7,6 +7,6 @@
 import RandomChart from "./RandomChart";
 
 export default {
-  components: {RandomChart},
+  components: { RandomChart },
 };
 </script>
