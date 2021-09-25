@@ -5,6 +5,16 @@
       rel="stylesheet"
     />
     <v-app>
+      <transition name="fade" appear>
+        <div
+          class="modal-overlay"
+          v-if="showModal || showDetail"
+          @click="
+            showModal = false;
+            showDetail = false;
+          "
+        ></div>
+      </transition>
       <v-app-bar
         app
         shrink-on-scroll
@@ -47,18 +57,22 @@
         max-height="600px"
       >
         <v-container>
-          <transition name="fade" appear>
-            <div
-              class="modal-overlay"
-              v-if="showModal"
-              @click="showModal = false"
-            ></div>
-          </transition>
           <v-row>
             <v-col v-for="n in 16" :key="n" cols="4">
-              <preview-card v-if="n % 2 === 0"></preview-card>
-              <v-card v-if="n % 2 === 1" elevation="2" height="300" width="400">
-                <team-goal-widget></team-goal-widget>
+              <preview-card
+                @click="showDetail = true"
+                height="300"
+                width="400"
+                v-if="n % 2 === 0"
+              ></preview-card>
+              <v-card
+                v-if="n % 2 === 1"
+                elevation="2"
+                height="300"
+                width="400"
+                @click="showDetail = true"
+              >
+                <team-goal-widget @click="showDetail = true"></team-goal-widget>
               </v-card>
             </v-col>
             <v-col cols="4">
@@ -75,15 +89,10 @@
 
         <transition name="slide" appear>
           <div class="modal" v-if="showModal">
-            <h1>Create a Leaderboard</h1>
-            <p>
-              To compare and compete with others, you can create your own
-              leaderboard, just specify a title, what type the competition
-              should have, and which interface to use. You can add a
-              description, and define whether the leaderboard is private or if
-              anyone can compete.
-            </p>
             <BoardForm v-on:closeModal="showModal = false"></BoardForm>
+          </div>
+          <div class="modal" v-if="showDetail">
+            <BoardDetails v-on:closeModal="showDetail = false"></BoardDetails>
           </div>
         </transition>
       </v-main>
@@ -98,11 +107,15 @@ import RandomChart from "@/components/RandomChart.vue";
 import BoardForm from "@/components/BoardForm.vue";
 
 import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
+import BoardDetails from "@/components/BoardDetails.vue";
 import PreviewCard from "@/components/PreviewCard.vue";
 
 @Component({
   components: {
     PreviewCard,
+
+    BoardDetails,
+
     TeamGoalWidget,
     RandomChart,
     BarChartWidget,
@@ -111,6 +124,7 @@ import PreviewCard from "@/components/PreviewCard.vue";
   data: () => {
     return {
       showModal: false,
+      showDetail: false,
 
       winNumber: 2,
       streakNumber: 32,

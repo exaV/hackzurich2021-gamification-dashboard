@@ -26,7 +26,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { DataProvider } from "@/components/data-provider";
-import BarChart2 from "@/components/BarChart2";
+import BarChart2 from "@/components/BarChart2.vue";
 
 const provider = new DataProvider();
 const data = provider.randomCollection(5);

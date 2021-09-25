@@ -1,5 +1,13 @@
 <template id="board-form">
   <v-container style="padding: 0">
+    <h1>Create a Leaderboard</h1>
+    <p>
+      To compare and compete with others, you can create your own
+      leaderboard, just specify a title, what type the competition
+      should have, and which interface to use. You can add a
+      description, and define whether the leaderboard is private or if
+      anyone can compete.
+    </p>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="title"
@@ -66,6 +74,16 @@ export default Vue.extend({
   name: "BoardForm",
   methods: {
     storeValuesAndClose: function () {
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: this.$data.title, description: this.$data.description, end_date:this.$data.end, private: this.$data.radioGroup === 1, password: this.$data.password, owner: 1 })
+      };
+      console.log(requestOptions)
+      fetch("http://cfbf-178-239-165-202.ngrok.io/api/v1/challenge/", requestOptions)
+          .then(response => response.json())
+          .then(response => console.log(response));
       //TODO store values with api
       this.$emit("closeModal");
     },
@@ -90,7 +108,7 @@ export default Vue.extend({
     interfaces: ["Fitbit", "Github", "Logging"],
     goal: 0,
     radioGroup: 0,
-    password: "",
+    password: null,
     //Add password validation
     passwordRules: [],
     end: "",

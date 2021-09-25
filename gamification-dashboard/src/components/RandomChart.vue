@@ -58,7 +58,13 @@ export default Vue.extend({
               },
               value: null,
             },
-            formatter: function (value, context) {
+            formatter: function (
+              value: any,
+              context: {
+                chart: { data: { datasets: { [x: string]: { label: any } } } };
+                datasetIndex: string | number;
+              }
+            ) {
               console.log(value, context);
               return context.chart.data.datasets[context.datasetIndex].label;
             },

@@ -8,7 +8,7 @@
   </v-card>
 </template>
 <script lang="ts">
-import RandomChart from "./RandomChart";
+import RandomChart from "@/components/RandomChart.vue";
 
 interface Challenge {
   title: string;
