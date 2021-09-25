@@ -57,16 +57,21 @@
         max-height="600px"
       >
         <v-container>
-          <v-row>
-            <v-col v-for="n in 16" :key="n" cols="4">
+          <v-row v-if="challenges">
+            <v-col
+              v-for="(challenge, index) in challenges.challenges"
+              :key="index"
+              cols="4"
+            >
               <preview-card
                 @click="showDetail = true"
                 height="300"
                 width="400"
-                v-if="n % 2 === 0"
+                v-if="index % 2 === 0"
+                v-bind:challenge="challenge"
               ></preview-card>
               <v-card
-                v-if="n % 2 === 1"
+                v-if="index % 2 === 1"
                 elevation="2"
                 height="300"
                 width="400"
@@ -84,6 +89,9 @@
                 </div>
               </v-card>
             </v-col>
+          </v-row>
+          <v-row v-else style="justify-content: center; align-items: center">
+            <v-progress-circular indeterminate></v-progress-circular>
           </v-row>
         </v-container>
 
@@ -143,7 +151,10 @@ export default Vue.extend({
   },
   methods: {
     fetchChallenges(id: number) {
-      provider.getChallenges(id).then(results => this.challenges = results).then(()=>console.log(this.challenges));
+      provider.getChallenges(id).then((result) => {
+        this.challenges = result;
+        console.log("result", this.challenges?.challenges);
+      });
     },
   },
 });

@@ -2,11 +2,10 @@
   <v-container style="padding: 0">
     <h1>Create a Leaderboard</h1>
     <p>
-      To compare and compete with others, you can create your own
-      leaderboard, just specify a title, what type the competition
-      should have, and which interface to use. You can add a
-      description, and define whether the leaderboard is private or if
-      anyone can compete.
+      To compare and compete with others, you can create your own leaderboard,
+      just specify a title, what type the competition should have, and which
+      interface to use. You can add a description, and define whether the
+      leaderboard is private or if anyone can compete.
     </p>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
@@ -74,16 +73,22 @@ export default Vue.extend({
   name: "BoardForm",
   methods: {
     storeValuesAndClose: function () {
-
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: this.$data.title, description: this.$data.description, end_date:this.$data.end, private: this.$data.radioGroup === 1, password: this.$data.password, owner: 1 })
+        body: JSON.stringify({
+          title: this.$data.title,
+          description: this.$data.description,
+          end_date: this.$data.end,
+          private: this.$data.radioGroup === 1,
+          password: this.$data.password,
+          owner: 1,
+        }),
       };
-      console.log(requestOptions)
-      fetch("https://70c6-178-239-165-206.ngrok.io/api/v1/challenge/", requestOptions)
-          .then(response => response.json())
-          .then(response => console.log(response));
+      console.log(requestOptions);
+      fetch(`${window.location.origin}/api/v1/challenge/`, requestOptions)
+        .then((response) => response.json())
+        .then((response) => console.log(response));
       //TODO store values with api
       this.$emit("closeModal");
     },

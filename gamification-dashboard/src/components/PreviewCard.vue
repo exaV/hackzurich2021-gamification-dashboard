@@ -10,6 +10,7 @@
             {{ challenge.description }}
           </v-row>
           <v-row style="height: 100%">
+            <!-- TODO show appropriate content here-->
             <random-chart></random-chart>
           </v-row>
         </v-col>
@@ -19,26 +20,24 @@
 </template>
 <script lang="ts">
 import RandomChart from "@/components/RandomChart.vue";
+import {
+  Challenge,
+  ChallengeEntry,
+  DataProvider,
+} from "@/components/data-provider";
 
-interface Challenge {
-  title: string;
-  description: string;
-}
+const provider = new DataProvider();
 
 export default {
   components: { RandomChart },
-  methods: {
-    makeChallenge(): Challenge {
-      return {
-        title: "1000 km",
-        description: "Run a thousand km with your team",
-      };
-    },
+  props: {
+    // eslint-disable-next-line
+    challenge: Challenge,
   },
   // eslint-disable-next-line
   data(): any {
     return {
-      challenge: this.makeChallenge(),
+      challengeDetails: null as ChallengeEntry[] | null,
     };
   },
 };
