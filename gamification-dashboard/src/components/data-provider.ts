@@ -1,12 +1,12 @@
 export class DataProvider {
   public randomCollection(size = 2): DataCollection {
     return {
-      labels: [this.getRandomInt()],
+      labels: [13522],
       datasets: [...Array(size).keys()].map((index) => {
         return {
           label: `Data ${index}`,
           backgroundColor: "#f87979",
-          data: [this.getRandomInt()],
+          data: [13522],
         };
       }),
     };

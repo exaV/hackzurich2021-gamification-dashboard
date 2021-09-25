@@ -14,7 +14,10 @@
             v-if="challenge.type === 'max'"
             v-bind:challenge-entries="challengeDetails"
           ></highest-score-chart>
-          <TeamGoalWidget v-if="challenge.type === 'sum-up'" v-bind:challenge-entries="challengeDetails" ></TeamGoalWidget>
+          <TeamGoalWidget v-else-if="challenge.type === 'sum-up'" v-bind:challenge-entries="challengeDetails" ></TeamGoalWidget>
+          <v-card-text v-else>
+            Lukas has a streak of 10 days
+          </v-card-text>
         </v-row>
         <v-row v-else>
           <v-progress-circular indeterminate></v-progress-circular>
