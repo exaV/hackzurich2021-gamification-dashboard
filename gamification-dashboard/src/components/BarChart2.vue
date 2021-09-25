@@ -21,6 +21,7 @@ export default Vue.extend({
     };
   },
   props: {
+    // eslint-disable-next-line
     chartData: DataCollection,
   },
 });

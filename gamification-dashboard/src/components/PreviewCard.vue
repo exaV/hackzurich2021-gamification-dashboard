@@ -25,7 +25,8 @@ export default {
       };
     },
   },
-  data() {
+  // eslint-disable-next-line
+  data(): any {
     return {
       challenge: this.makeChallenge(),
     };

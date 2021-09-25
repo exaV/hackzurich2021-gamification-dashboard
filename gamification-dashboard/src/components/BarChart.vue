@@ -9,6 +9,7 @@ export default Vue.extend({
   props: ["chartdata", "options"],
   mixins: [reactiveProp],
   mounted() {
+    // eslint-disable-next-line
     this.renderChart(this.chartdata, this.options);
   },
 });

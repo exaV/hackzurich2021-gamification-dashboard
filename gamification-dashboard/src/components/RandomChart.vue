@@ -3,6 +3,7 @@
     <bar-chart
       :chart-data="datacollection"
       :options="chartOptions"
+      :styles="chartStyles"
       class="chart"
     ></bar-chart>
     <button @click="fillData">Randomize</button>
