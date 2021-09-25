@@ -1,38 +1,49 @@
 <template>
-
-    <v-container style="padding: 2em">
-      <v-row style="height: 100%">
-        <v-col>
-          <v-row class="title">
-            {{ challenge.title }}
-          </v-row>
-          <v-row class="subtitle">
-            {{ challenge.description }}
-          </v-row>
-          <v-row style="height: 100%">
-            <!-- TODO show appropriate content here-->
-            <random-chart></random-chart>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-container>
-
+  <v-container style="padding: 2em">
+    <v-row style="height: 100%">
+      <v-col>
+        <v-row class="title">
+          {{ challenge.title }}
+        </v-row>
+        <v-row class="subtitle">
+          {{ challenge.description }}
+        </v-row>
+        <v-row v-if="challengeDetails" style="height: 100%">
+          <!-- TODO show appropriate content here base on-->
+          <highest-score-chart
+            v-bind:challenge-entries="challengeDetails"
+          ></highest-score-chart>
+        </v-row>
+        <v-row v-else>
+          <v-progress-circular indeterminate></v-progress-circular>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script lang="ts">
-import RandomChart from "@/components/RandomChart.vue";
+
 import {
   Challenge,
   ChallengeEntry,
   DataProvider,
 } from "@/components/data-provider";
+import HighestScoreChart from "@/components/HighestScoreChart.vue";
 
 const provider = new DataProvider();
 
 export default {
-  components: { RandomChart },
+  components: { HighestScoreChart },
   props: {
     // eslint-disable-next-line
     challenge: Challenge,
+  },
+  mounted() {
+    console.log(`challenge with type ${this.challenge.type}`);
+    provider.getChallengeEntry(this.challenge?.id).then((entries) => {
+      this.challengeDetails = entries;
+      console.log("entries", entries);
+    });
   },
   // eslint-disable-next-line
   data(): any {

@@ -38,7 +38,7 @@ export class DataProvider {
       headers: { "Content-Type": "application/json" },
     };
     const response = await fetch(
-      `${window.location.origin}api/v1/challengeentry?challenge=${challenge}`,
+      `${window.location.origin}/api/v1/challengeentry?challenge=${challenge}`,
       requestOptions
     );
     const data = await response.json();
@@ -53,6 +53,7 @@ export interface LeaderBoardCollection {
 
 export interface Challenge {
   id: number;
+  type: string;
   created_at: string;
   title: string;
   description: string;
