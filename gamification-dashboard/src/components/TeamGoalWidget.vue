@@ -5,7 +5,7 @@
         :chartdata="sum"
         :options="chartOptions"
         :styles="chartStyles"
-        style="max-width: 30%; max-height: 100%"
+        style="max-width: 30%; max-height: 100%; padding-bottom: 12px"
       ></BarChart>
       <v-spacer style="width: 1em"></v-spacer>
       <v-simple-table>
@@ -43,6 +43,41 @@ export default Vue.extend({
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
+        legend: {
+          display: false,
+        },
+        scales: {
+          xAxes: [
+            {
+              display: false,
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              display: false,
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+        },
+        plugins: {
+          datalabels: {
+            align: "end",
+            anchor: "end",
+            labels: {
+              title: {
+                font: {
+                  weight: "bold",
+                },
+              },
+              value: null,
+            },
+          },
+        },
       },
       chartStyles: {
         position: "relative",

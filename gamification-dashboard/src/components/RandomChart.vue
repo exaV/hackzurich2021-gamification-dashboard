@@ -1,10 +1,12 @@
 <template>
-  <v-container>
-    <v-col>
-      <bar-chart :chart-data="datacollection" class="chart"></bar-chart>
-      <button @click="fillData">Randomize</button>
-    </v-col>
-  </v-container>
+  <v-sheet>
+    <bar-chart
+      :chart-data="datacollection"
+      :options="chartOptions"
+      class="chart"
+    ></bar-chart>
+    <button @click="fillData">Randomize</button>
+  </v-sheet>
 </template>
 
 <script lang="ts">
@@ -23,6 +25,45 @@ export default Vue.extend({
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
+        legend: {
+          display: false,
+        },
+        scales: {
+          xAxes: [
+            {
+              display: false,
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              display: false,
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+        },
+        plugins: {
+          datalabels: {
+            align: "end",
+            anchor: "end",
+            labels: {
+              title: {
+                font: {
+                  weight: "bold",
+                },
+              },
+              value: null,
+            },
+            formatter: function (value, context) {
+              console.log(value, context);
+              return context.chart.data.datasets[context.datasetIndex].label;
+            },
+          },
+        },
       },
       chartStyles: {
         position: "relative",
