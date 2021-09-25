@@ -56,9 +56,9 @@
           </transition>
           <v-row>
             <v-col v-for="n in 16" :key="n" cols="4">
-              <v-card elevation="2" height="300" width="400">
-                <random-chart v-if="n % 2 === 0"></random-chart>
-                <team-goal-widget v-if="n % 2 === 1"></team-goal-widget>
+              <preview-card v-if="n % 2 === 0"></preview-card>
+              <v-card v-if="n % 2 === 1" elevation="2" height="300" width="400">
+                <team-goal-widget></team-goal-widget>
               </v-card>
             </v-col>
             <v-col cols="4">
@@ -98,9 +98,11 @@ import RandomChart from "@/components/RandomChart.vue";
 import BoardForm from "@/components/BoardForm.vue";
 
 import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
+import PreviewCard from "@/components/PreviewCard.vue";
 
 @Component({
   components: {
+    PreviewCard,
     TeamGoalWidget,
     RandomChart,
     BarChartWidget,
