@@ -64,18 +64,24 @@
               cols="4"
             >
               <preview-card
-                @click="showDetail = true"
                 height="300"
                 width="400"
                 v-if="index % 2 === 0"
                 v-bind:challenge="challenge"
+                @click="
+                  this.currentBoardComponent = challenge;
+                  showDetail = true;
+                "
               ></preview-card>
               <v-card
                 v-if="index % 2 === 1"
                 elevation="2"
                 height="300"
                 width="400"
-                @click="showDetail = true"
+                @click="
+                  this.currentBoardComponent = challenge;
+                  showDetail = true;
+                "
               >
                 <team-goal-widget @click="showDetail = true"></team-goal-widget>
               </v-card>
@@ -102,7 +108,7 @@
           <div class="modal" v-if="showDetail">
             <BoardDetails
               v-on:closeModal="showDetail = false"
-              v-bind:is="currentBoardComponent"
+              v-bind:board="currentBoardComponent"
             ></BoardDetails>
           </div>
         </transition>
@@ -113,14 +119,13 @@
 
 <script lang="ts">
 import { Vue } from "vue-property-decorator";
-import BarChartWidget from "@/components/BarChartWidget.vue";
-import RandomChart from "@/components/RandomChart.vue";
 import BoardForm from "@/components/BoardForm.vue";
 
 import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
 import BoardDetails from "@/components/BoardDetails.vue";
 import PreviewCard from "@/components/PreviewCard.vue";
 import {
+  Challenge,
   DataProvider,
   LeaderBoardCollection,
 } from "@/components/data-provider";
@@ -132,8 +137,6 @@ export default Vue.extend({
     PreviewCard,
     BoardDetails,
     TeamGoalWidget,
-    RandomChart,
-    BarChartWidget,
     BoardForm,
   },
   data: () => {
@@ -141,7 +144,7 @@ export default Vue.extend({
       showModal: false,
       showDetail: false,
       challenges: null as LeaderBoardCollection | null,
-
+      currentBoardComponent: null as Challenge | null,
       winNumber: 2,
       streakNumber: 32,
     };
@@ -151,10 +154,7 @@ export default Vue.extend({
   },
   methods: {
     fetchChallenges(id: number) {
-      provider.getChallenges(id).then((result) => {
-        this.challenges = result;
-        console.log("result", this.challenges?.challenges);
-      });
+      provider.getChallenges(id).then((results) => (this.challenges = results));
     },
   },
 });

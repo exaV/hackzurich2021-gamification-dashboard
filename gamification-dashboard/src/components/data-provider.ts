@@ -34,6 +34,7 @@ export class DataProvider {
 }
 
 export interface LeaderBoardCollection {
+
   challenges: Challenge[];
 }
 
@@ -48,6 +49,7 @@ export interface Challenge {
   password: string;
   owner: number;
 }
+
 
 export interface DataCollection {
   datasets: {

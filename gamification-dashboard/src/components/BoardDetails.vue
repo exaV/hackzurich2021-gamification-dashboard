@@ -1,15 +1,13 @@
 <template>
   <v-container style="padding: 0">
-    <h1>{{ title }}</h1>
+    <h1>{{ board.title }}</h1>
     <p>
-      {{ description }}
+      {{ board.description }}
     </p>
     <v-row>
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card style="max-height: 500px; overflow: hidden; margin-bottom: 2em">
-          <v-subheader class="rank_title">
-            Ranking
-          </v-subheader>
+          <v-subheader class="rank_title"> Ranking </v-subheader>
           <v-list one-line style="max-height: 450px; overflow-y: auto">
             <template v-for="(item, index) in items">
               <v-divider
@@ -41,7 +39,7 @@
 <script>
 export default {
   name: "BoardDetails",
-  props: ['board'],
+  props: ["board"],
   data: () => ({
     title: "Leaderboard name",
     user: "Lukas",
@@ -65,7 +63,7 @@ export default {
       { avatar: "https://picsum.photos/200", name: "Andy", rank: 8 },
       { avatar: "https://picsum.photos/200", name: "Sarah", rank: 9 },
       { avatar: "https://picsum.photos/200", name: "Lars", rank: 10 },
-      { avatar: "https://picsum.photos/200", name: "Diana", rank:11 },
+      { avatar: "https://picsum.photos/200", name: "Diana", rank: 11 },
     ],
   }),
 };
