@@ -92,7 +92,10 @@
             <BoardForm v-on:closeModal="showModal = false"></BoardForm>
           </div>
           <div class="modal" v-if="showDetail">
-            <BoardDetails v-on:closeModal="showDetail = false"></BoardDetails>
+            <BoardDetails
+              v-on:closeModal="showDetail = false"
+              v-bind:is="currentBoardComponent"
+            ></BoardDetails>
           </div>
         </transition>
       </v-main>
@@ -101,7 +104,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Vue } from "vue-property-decorator";
 import BarChartWidget from "@/components/BarChartWidget.vue";
 import RandomChart from "@/components/RandomChart.vue";
 import BoardForm from "@/components/BoardForm.vue";
@@ -109,13 +112,17 @@ import BoardForm from "@/components/BoardForm.vue";
 import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
 import BoardDetails from "@/components/BoardDetails.vue";
 import PreviewCard from "@/components/PreviewCard.vue";
+import {
+  DataProvider,
+  LeaderBoardCollection,
+} from "@/components/data-provider";
 
-@Component({
+const provider = new DataProvider();
+export default Vue.extend({
+  name: "App",
   components: {
     PreviewCard,
-
     BoardDetails,
-
     TeamGoalWidget,
     RandomChart,
     BarChartWidget,
@@ -125,13 +132,21 @@ import PreviewCard from "@/components/PreviewCard.vue";
     return {
       showModal: false,
       showDetail: false,
+      challenges: null as LeaderBoardCollection | null,
 
       winNumber: 2,
       streakNumber: 32,
     };
   },
-})
-export default class App extends Vue {}
+  mounted() {
+    this.fetchChallenges(1);
+  },
+  methods: {
+    fetchChallenges(id: number) {
+      provider.getChallenges(id).then(results => this.challenges = results).then(()=>console.log(this.challenges));
+    },
+  },
+});
 </script>
 
 <style>

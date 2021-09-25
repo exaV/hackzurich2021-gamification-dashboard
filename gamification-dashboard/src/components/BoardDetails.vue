@@ -41,6 +41,7 @@
 <script>
 export default {
   name: "BoardDetails",
+  props: ['board'],
   data: () => ({
     title: "Leaderboard name",
     user: "Lukas",
