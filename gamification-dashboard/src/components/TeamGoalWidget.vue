@@ -45,7 +45,7 @@ export default Vue.extend({
         maintainAspectRatio: false,
       },
       chartStyles: {
-        // position: "relative",
+        position: "relative",
       },
     };
   },

@@ -18,6 +18,13 @@ export default Vue.extend({
   data() {
     return {
       datacollection: null as DataCollection | null,
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+      chartStyles: {
+        position: "relative",
+      },
     };
   },
   mounted() {
