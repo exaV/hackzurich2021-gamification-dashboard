@@ -63,27 +63,32 @@
               :key="index"
               cols="4"
             >
-              <preview-card
+              <v-card
+                v-if="index % 2 === 0"
+                elevation="2"
+                class="preview-card"
                 height="300"
                 width="400"
-                v-if="index % 2 === 0"
-                v-bind:challenge="challenge"
                 @click="
-                  this.currentBoardComponent = challenge;
+                  currentBoardComponent = challenge;
                   showDetail = true;
                 "
-              ></preview-card>
+              >
+                <preview-card
+                  v-bind:challenge="challenge"
+                ></preview-card>
+              </v-card>
               <v-card
                 v-if="index % 2 === 1"
                 elevation="2"
                 height="300"
                 width="400"
                 @click="
-                  this.currentBoardComponent = challenge;
+                  currentBoardComponent = challenge;
                   showDetail = true;
                 "
               >
-                <team-goal-widget @click="showDetail = true"></team-goal-widget>
+                <team-goal-widget></team-goal-widget>
               </v-card>
             </v-col>
             <v-col cols="4">

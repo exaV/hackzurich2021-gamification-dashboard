@@ -6,7 +6,7 @@
       :styles="chartStyles"
       class="chart"
     ></bar-chart>
-    <button @click="fillData">Randomize</button>
+
   </v-col>
 </template>
 

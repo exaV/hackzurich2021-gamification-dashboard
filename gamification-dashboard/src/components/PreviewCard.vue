@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="2" class="preview-card" height="300" width="400">
+
     <v-container style="padding: 2em">
       <v-row style="height: 100%">
         <v-col>
@@ -16,7 +16,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-card>
+
 </template>
 <script lang="ts">
 import RandomChart from "@/components/RandomChart.vue";
