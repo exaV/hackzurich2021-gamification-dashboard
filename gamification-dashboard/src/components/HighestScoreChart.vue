@@ -92,7 +92,7 @@ export default Vue.extend({
           return {
             backgroundColor: "#f87979",
             data: [entry.value],
-            label: entry.user.username,
+            label: entry.user.first_name,
           };
         }),
         labels: ["blubbb"],
