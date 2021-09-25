@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-col style="height: 100%">
     <bar-chart
       :chart-data="datacollection"
       :options="chartOptions"
@@ -7,7 +7,7 @@
       class="chart"
     ></bar-chart>
     <button @click="fillData">Randomize</button>
-  </v-sheet>
+  </v-col>
 </template>
 
 <script lang="ts">
@@ -74,6 +74,7 @@ export default Vue.extend({
       },
       chartStyles: {
         position: "relative",
+        height: "100%",
       },
     };
   },
