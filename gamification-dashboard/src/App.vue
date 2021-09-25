@@ -1,19 +1,59 @@
 <template>
-  <div id="app">
+  <div id="app" class="overflow-hidden">
     <link
       href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css"
       rel="stylesheet"
     />
     <v-app>
-      <transition name="fade" appear>
-        <div
-          class="modal-overlay"
-          v-if="showModal"
-          @click="showModal = false"
-        ></div>
-      </transition>
-      <v-main>
+      <v-app-bar
+        app
+        shrink-on-scroll
+        color="#CC2E50"
+        dark
+        prominent
+        src="https://picsum.photos/id/547/1920/1080"
+        fade-img-on-scroll
+      >
+        <template v-slot:img="{ props }">
+          <v-img
+            v-bind="props"
+            gradient="to top, rgba(204,	46,	80, 0.7), rgba(255,	88,	89, 0.7)"
+          ></v-img>
+        </template>
+        <!--
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+-->
+        <v-toolbar-title class="bartitle">Leaderboard</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+        <div class="achievements">
+          <v-btn icon class="iconFont"> 🔥</v-btn>
+          <div class="achievementNumber">
+            {{ streakNumber }}
+          </div>
+        </div>
+        <div class="achievements">
+          <v-btn icon class="iconFont"> 👑</v-btn>
+          <div class="achievementNumber">
+            {{ winNumber }}
+          </div>
+        </div>
+        <v-btn icon class="iconFont"> 🙋</v-btn>
+      </v-app-bar>
+
+      <v-main
+        id="scrolling-techniques-3"
+        class="overflow-y-auto"
+        max-height="600px"
+      >
         <v-container>
+          <transition name="fade" appear>
+            <div
+              class="modal-overlay"
+              v-if="showModal"
+              @click="showModal = false"
+            ></div>
+          </transition>
           <v-row>
             <v-col v-for="n in 16" :key="n" cols="4">
               <v-card elevation="2" height="300" width="400">
@@ -24,7 +64,7 @@
             <v-col cols="4">
               <v-card elevation="2" height="300" width="400" class="addBoard">
                 <div class="addBoardDiv" @click="showModal = true">
-                  <v-icon x-large dark class="hugeicon"
+                  <v-icon x-large dark class="hugeIcon"
                     >mdi-plus-circle-outline
                   </v-icon>
                 </div>
@@ -56,6 +96,7 @@ import { Component, Vue } from "vue-property-decorator";
 import BarChartWidget from "@/components/BarChartWidget.vue";
 import RandomChart from "@/components/RandomChart.vue";
 import BoardForm from "@/components/BoardForm.vue";
+
 import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
 
 @Component({
@@ -68,6 +109,9 @@ import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
   data: () => {
     return {
       showModal: false,
+
+      winNumber: 2,
+      streakNumber: 32,
     };
   },
 })

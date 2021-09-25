@@ -2,51 +2,55 @@
   <v-container style="padding: 0">
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
-          v-model="title"
-          :counter="15"
-          :rules="nameRules"
-          label="Title"
-          required
+        v-model="title"
+        :counter="15"
+        :rules="nameRules"
+        label="Title"
+        required
       ></v-text-field>
       <v-select
-          v-model="select"
-          :items="items"
-          :rules="[(v) => !!v || 'Board type is required']"
-          label="Type"
-          required
+        v-model="select"
+        :items="items"
+        :rules="[(v) => !!v || 'Board type is required']"
+        label="Type"
+        required
       ></v-select>
+      <v-text-field
+        v-model="goal"
+        label="Goal"
+        type="number"
+        v-if="select == items[3]"
+      >
+      </v-text-field>
       <v-select
-          v-model="select"
-          :items="interfaces"
-          :rules="[(v) => !!v || 'Interface is required']"
-          label="Interface"
-          required
+        v-model="datasource"
+        :items="interfaces"
+        :rules="[(v) => !!v || 'Datasource is required']"
+        label="Datasource"
+        required
       ></v-select>
       <v-textarea
-          v-model="description"
-          :counter="250"
-          :rules="descriptionRules"
-          label="Description"
+        v-model="description"
+        :counter="250"
+        :rules="descriptionRules"
+        label="Description"
       ></v-textarea>
-      <v-text-field v-model="end" type="date" label="End time" required></v-text-field>
+      <v-text-field
+        v-model="end"
+        type="date"
+        label="End time"
+        required
+      ></v-text-field>
       <v-radio-group v-model="radioGroup">
-        <v-radio
-            label="Public"
-            value=0
-        ></v-radio>
-        <v-radio
-            label="Private"
-            value=1
-        ></v-radio>
+        <v-radio label="Public" value="0"></v-radio>
+        <v-radio label="Private" value="1"></v-radio>
       </v-radio-group>
       <v-text-field
-          v-model="password"
-          :counter="15"
-
-          label="Password"
-          v-if="radioGroup == 1"
+        v-model="password"
+        :counter="15"
+        label="Password"
+        v-if="radioGroup == 1"
       ></v-text-field>
-
     </v-form>
     <button class="button_form" v-on:click="storeValuesAndClose()">
       Create
@@ -57,43 +61,39 @@
 <script lang="ts">
 import Vue from "vue";
 
-export default Vue.extend( {
-  template: '#board-form',
+export default Vue.extend({
+  template: "#board-form",
   name: "BoardForm",
   methods: {
     storeValuesAndClose: function () {
       //TODO store values with api
-      this.$emit('closeModal')
-    }
+      this.$emit("closeModal");
+    },
   },
   data: () => ({
     valid: true,
-    title: '',
+    title: "",
     nameRules: [
-      (v: any) => !!v || 'Title is required',
-      (v: string | any[]) => (v && v.length <= 15) || 'Title must be less than 15 characters',
+      (v: any) => !!v || "Title is required",
+      (v: string | any[]) =>
+        (v && v.length <= 15) || "Title must be less than 15 characters",
     ],
-    description: '',
+    description: "",
     descriptionRules: [
-      (v: string | any[]) => (v && v.length <= 250) || 'Description must be less than 250 characters',
+      (v: string | any[]) =>
+        (v && v.length <= 250) ||
+        "Description must be less than 250 characters",
     ],
     select: null,
-    items: [
-      'Highest Value',
-      'Lowest Value',
-      'Streak',
-      'Global Goal',
-    ],
-    interfaces: [
-      'Fitbit',
-      'Github',
-      'Logging',
-    ],
+    items: ["Highest Value", "Lowest Value", "Streak", "Global Goal"],
+    datasource: null,
+    interfaces: ["Fitbit", "Github", "Logging"],
+    goal: 0,
     radioGroup: 0,
-    password: '',
+    password: "",
     //Add password validation
     passwordRules: [],
-    end: '',
+    end: "",
   }),
 });
 </script>
