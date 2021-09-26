@@ -14,10 +14,11 @@
             v-if="challenge.type === 'max'"
             v-bind:challenge-entries="challengeDetails"
           ></highest-score-chart>
-          <TeamGoalWidget v-else-if="challenge.type === 'sum-up'" v-bind:challenge-entries="challengeDetails" ></TeamGoalWidget>
-          <v-card-text v-else>
-            Lukas has a streak of 10 days
-          </v-card-text>
+          <TeamGoalWidget
+            v-else-if="challenge.type === 'sum-up'"
+            v-bind:challenge-entries="challengeDetails"
+          ></TeamGoalWidget>
+          <v-card-text v-else> Lukas has a streak of 10 days</v-card-text>
         </v-row>
         <v-row v-else>
           <v-progress-circular indeterminate></v-progress-circular>
@@ -34,21 +35,40 @@ import {
 } from "@/components/data-provider";
 import HighestScoreChart from "@/components/HighestScoreChart.vue";
 import TeamGoalWidget from "@/components/TeamGoalWidget.vue";
+import Vue from "vue";
 
 const provider = new DataProvider();
 
-export default {
+export default Vue.extend({
   components: { TeamGoalWidget, HighestScoreChart },
   props: {
     // eslint-disable-next-line
     challenge: Challenge,
+    poll: Boolean,
+  },
+  methods: {
+    updateData(): void {
+      provider.getChallengeEntry(this.challenge?.id).then((entries) => {
+        this.challengeDetails = entries;
+        console.log(`loaded ${entries.length} entries for challenge ${this.challenge?.title}`);
+      });
+    },
+    startPolling(): void {
+      setInterval(() => {
+        if (this.poll) {
+          this.updateData();
+        }
+      }, 2000);
+
+      setTimeout(() => {
+        this.pollData();
+      }, 2000);
+    },
   },
   mounted() {
     console.log(`challenge with type ${this.challenge.type}`);
-    provider.getChallengeEntry(this.challenge?.id).then((entries) => {
-      this.challengeDetails = entries;
-      console.log("entries", entries);
-    });
+    this.updateData();
+    this.startPolling();
   },
   // eslint-disable-next-line
   data(): any {
@@ -56,7 +76,7 @@ export default {
       challengeDetails: null as ChallengeEntry[] | null,
     };
   },
-};
+});
 </script>
 
 <style>

@@ -73,7 +73,7 @@
                   showDetail = true;
                 "
               >
-                <preview-card v-bind:challenge="challenge"></preview-card>
+                <preview-card v-bind:challenge="challenge" poll="true"></preview-card>
               </v-card>
             </v-col>
             <v-col cols="4">

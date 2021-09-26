@@ -26,7 +26,7 @@ export class DataProvider {
       requestOptions
     );
     const data = await response.json();
-    console.log("data", data);
+    // console.log("data", data);
     return {
       challenges: data as unknown as Challenge[],
     };
@@ -42,7 +42,7 @@ export class DataProvider {
       requestOptions
     );
     const data = await response.json();
-    console.log("data", data);
+    // console.log("data", data);
     return data as unknown as ChallengeEntry[];
   }
 
