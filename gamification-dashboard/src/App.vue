@@ -33,7 +33,7 @@
         <!--
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
 -->
-        <v-toolbar-title class="bartitle">Leaderboard</v-toolbar-title>
+        <v-toolbar-title class="bartitle">Rivalize</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <div class="achievements">
