@@ -1,6 +1,6 @@
 <template>
   <v-container style="padding: 0">
-    <h1>{{ board.title }}</h1>
+    <h1>{{ board.title }} #{{ board.id }}</h1>
     <div>
       {{ board.description }}
     </div>
@@ -41,12 +41,14 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {ChallengeEntry, DataProvider} from "@/components/data-provider";
+import {ChallengeEntry, DataProvider, Challenge} from "@/components/data-provider";
 
 const provider = new DataProvider();
 export default Vue.extend({
   name: "BoardDetails",
-  props: ["board"],
+  props: {
+    board: Challenge,
+  },
   data: () => ({
     title: "Leaderboard name",
     user: "Lukas",
