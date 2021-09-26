@@ -1,0 +1,33 @@
+{
+  "challenges": [
+    {
+      "id": "1",
+      "title": "100km",
+      "description": "Run 100km as a team until the end of the month",
+      "challengeType": "max"
+    },
+    {
+      "id": "2",
+      "title": "Win some",
+      "description": "Run 100km as a team until the end of the month",
+      "challengeType": "max"
+    }
+  ],
+  "entries": [
+    {
+      "value": 5,
+      "user": {
+        "id": "1414",
+        "username": "Shreddrik"
+      }
+    },
+    {
+      "value": 15,
+      "user": {
+        "id": "1410",
+        "username": "pingu"
+      }
+    }
+
+  ]
+}

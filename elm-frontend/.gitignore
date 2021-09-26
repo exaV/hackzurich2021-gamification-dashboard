@@ -1,0 +1,5 @@
+output/
+!output/index.html
+.idea/
+elm-stuff/
+node_modules/

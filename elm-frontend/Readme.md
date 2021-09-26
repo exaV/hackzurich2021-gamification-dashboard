@@ -1,0 +1,1 @@
+execute `yarn json` and `yarn dev` in two separate terminals
